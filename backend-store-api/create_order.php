@@ -1,18 +1,22 @@
 <?php
+//return json not html
 header('Content-Type: application/json');
 include 'db.php';
-//read json input
-$data = json_decode(file_get_contents("php://input"),true);
-if(!$data) {
+//read json input 
+$data = json_decode(file_get_contents("php://input"), true);
+//validate json 
+if (!$data) {
     echo json_encode([
         "status"=>"error",
         "message"=>"Invalid JSON"
     ]);
     exit;
 }
-$product_id=$data["product_id"]??"";
-$quantity=$data["quantity"]??"";
+//extract values from json
+$product_id= $data["product_id"]??"";
+$quantity= $data["quantity"]??"";
 $customer_name=$data["customer_name"]??"";
+//validate required files
 if($product_id === "" || $quantity === "" || $customer_name==="") {
     echo json_encode([
         "status" =>"error",
@@ -24,10 +28,10 @@ if($product_id === "" || $quantity === "" || $customer_name==="") {
 
 //get product price
 $query =$conn->prepare("SELECT * FROM products WHERE id =?");
-$query->bind_param("i",$product_id);
+$query->bind_param("i",$product_id);//bind the product id
 $query->execute();
 $result= $query->get_result();
-
+//error if product doesnt exist
 if($result->num_rows ==0) {
    echo json_encode([
         "status"=>"error",
@@ -35,15 +39,15 @@ if($result->num_rows ==0) {
     ]);
     exit;
 }
-
+//calculate total price
 $product=$result->fetch_assoc();
 $price=floatval($product["price"]);
 $total=$price * $quantity;
 
-//insert order
-$query = $conn->prepare("INSERT INTO orders (product_id, quantity, customer_name, total_price) 
-                         VALUES (?, ?, ?, ?)");
-$query->bind_param("iisd",$product_id,$quantity,$customer_name,$total);
+//insert order into database
+$query = $conn->prepare("INSERT INTO orders (product_id, quantity, customer_name, total_price)  VALUES (?, ?, ?, ?)");
+$query->bind_param("iisd",$product_id,$quantity,$customer_name,$total);//bind values
+//execute then return response
 if($query->execute()){
     echo json_encode([
         "status"=>"success",

@@ -1,7 +1,8 @@
 <?php
+//response is json 
 header('Content-Type:application/json');
 include 'db.php';
-
+//validate get 
 if(!isset($_GET['product_id'])|| $_GET['product_id']===""){
     echo json_encode([
         "status"=>"error",
@@ -9,13 +10,15 @@ if(!isset($_GET['product_id'])|| $_GET['product_id']===""){
     ]);
     exit;
 }
+//covert product id to int
 $product_id =intval($_GET['product_id']);
-$query =$conn->prepare("SELECT * FROM orders WHERE id =? ORDER BY id DESC LIMIT 10");
+$query =$conn->prepare("SELECT * FROM orders WHERE product_id =? ORDER BY id DESC LIMIT 10");
 $query->bind_param("i",$product_id);
 $query->execute();
 $result= $query->get_result();
 
 $orders=[];
+//show rows in the array
 if($result &&$result->num_rows > 0){
     while($row=$result->fetch_assoc()){
         $orders[]=$row;
@@ -24,7 +27,7 @@ if($result &&$result->num_rows > 0){
         "status"=>"success",
         "orders"=>$orders
     ]);
-} else {
+} else { //return success with emplty list
     echo json_encode([
         "status"=>"success",
         "orders"=>[]
