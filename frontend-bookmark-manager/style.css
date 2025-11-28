@@ -7,6 +7,45 @@ body{
     color:#333
 }
 
+.main-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 40px;
+}
+
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 25px;
+    background-color: white;
+}
+
+body.dark-mode .top-bar {
+    background-color: #2b2b2b;
+}
+
+#viewModeSection {
+    display: flex;
+    flex-direction: column;
+    width: 150px;
+    gap: 10px;
+    margin-top: 40px;
+    margin-left: 20px;
+}
+
+#viewModeSection button {
+    display: block;
+    width: 150px;
+    margin-bottom: 15px;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+}
+
 /*dark mode*/
 body.dark-mode{
     background-color:#1e1e1e;
@@ -18,17 +57,24 @@ body.dark-mode{
 .controls{
     display:flex;
     gap: 10px;
-    padding:20px;
+    padding:0 ;
     justify-content:center;
 }
 
 /*inputs*/
-input[type="text"]{
+input[type="text"],
+input[type="url"] {
     padding: 8px 12px;
     font-size:16px;
     border-radius:6px;
     border:1px solid #ccc;
 }
+
+input[type="text"]:focus,
+input[type="url"]:focus {
+    border-color: #888;
+}
+
 /*buttons*/
 button{
     padding:8px 12px;
@@ -40,6 +86,7 @@ button{
     color:white;
     transition:background-color 0.2s;
 }
+
 button:hover{
     background-color:#555;
 }
@@ -48,11 +95,13 @@ button:hover{
     display:flex;
     flex-wrap:wrap;
     gap:20px;
-    padding: 20px;
+    padding:0 20px;
     justify-content:center;
+    margin-top: 0;
+    padding-top: 0;
 }
 
-#bookmarksContainer.card-view.bookmark{
+#bookmarksContainer.card-view .bookmark {
     width:200px;
     border-radius:10px;
     background-color:white;
@@ -60,27 +109,41 @@ button:hover{
     box-shadow:0 4px 8px rgba(0,0,0,0.1);
     display:flex;
     flex-direction:column;
+    align-items:flex-start;
     gap:10px;
 }
 
 /*dark mode card*/
-body.dark-mode #bookmarksContainer.card-view.bookmark {
+body.dark-mode #bookmarksContainer.card-view .bookmark {
     background-color: #2e2e2e;
 }
+
+#bookmarksListsSection {
+    padding-top: 0;
+    margin-top: 35px;
+}
+
 /*list view*/
 #bookmarksContainer.list-view .bookmark {
-    width:80%;
+    width:100%;
+    max-width:800px;
+    margin:15px auto;
     border-radius: 8px;
     background-color:white;
-    padding: 10px 15px;
+    padding: 12px 15px;
     display:flex;
     justify-content: space-between;
     align-items:center;
+    box-shadow:0 2px 5px rgba(0,0,0,0.1);
+    font-size:16px;
 }
+
+
 /*dark mode lst view*/
-body.dark-mode #bookmarksContainer.list-view.bookmark{
+body.dark-mode #bookmarksContainer.list-view .bookmark{
     background-color:#2e2e2e;
 }
+
 /*bookmark link*/
 .bookmark a {
     text-decoration:none;
@@ -90,13 +153,26 @@ body.dark-mode #bookmarksContainer.list-view.bookmark{
 /*favorite button*/
 .bookmark button{
     font-size:18px;
-    padding:4px 8ps;
+    padding:4px 8px;
     background-color:transparent;
     color:inherit;
 }
+
+.bookmark:hover {
+    transform: scale(1.02);
+    transition: 0.2s;
+}
+
 #empty{
     text-align: center;
     font-size: 18px;
     color:#888;
     margin-top:20px;
+}
+
+footer{
+    text-align:center;
+    margin-top:50px;
+    font-size:14px;
+    color:#888;
 }

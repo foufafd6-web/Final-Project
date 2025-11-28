@@ -5,38 +5,52 @@
     <title>Bookmark Manager!</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+  <div class="container">
+    <!--header-->
+    <header class="top-bar">
+         <h1>    🔖Bookmark manager  </h1>
+         <button id="lightDarkMode">Dark mode</button>
+    </header>
 
     <!--Add bookmark details-->
 
-    <section id="addBookMarks" class="page-section">
-        <h1>🔖Bookmark manager</h1>
-        <h2>Hope you enjoy your experience!:> </h2>
-        <h3> Bookmark Your Favorite sites ⬇️</h3>
+     <section id="addBookMarks" class="page-section">
+          <h2>  Hope you enjoy your experience!  </h2>
+          <h3>       Bookmark Your Favorite Sites ⬇️    </h3>
+       
+          <div class="controls">
+              <input id="siteName" type="text" placeholder="Enter website name">
+              <input id="URL" type="url" placeholder="Enter URL https://example.com">
+              <button id="addButton">Add Bookmark</button>
+          </div>
+      </section>
 
-        <button id="lightDarkMode">light/dark</button>
+      <div class="main-content">
 
-        <input id="siteName" type="text" placeholder="Enter website name">
-        <input id="URL" type="url" placeholder="Enter website URL https://example.com">
+         <!--View Mode Section-->
+         <section id="viewModeSection" class="page-section vertical-buttons">
+             <button id="cardView">card view</button>
+             <button id="listView">list view</button>
+             <button id="showFavorites">Show Favorites</button>
+         </section>
 
-        <button id="addButton">Add Bookmark</button>
-    </section>
+         <!--Bookmark list-->
 
-    <!--View Mode Section-->
+         <section id="bookmarksListsSection" class="page-section">
+             <div id="bookmarksContainer"></div>
+             <div id="empty">No bookmarks yet.</div>
+         </section>
+      </div>
 
-    <section id="viewModeSection" class="page-section">
-        <button id="cardView">card view</button>
-        <button id="listView">list view</button>
-        <button id="showFavorites>">show Favorites</button>
-    </section>
+       <!--footer-->
 
-    <!--Bookmark list-->
+       <footer>
+          This is my very first webpage ever — follow me, I will impress you ❤️
+       </footer>
+    </div>
 
-    <section id="bookmarksListsSection" class="page-section">
-        <div id="bookmarksContainer"></div>
-        <div id="empty">No bookmarks yet.</div>
-    </section>
-    
     <script src="script.js"></script>  
 </body>
 </html>

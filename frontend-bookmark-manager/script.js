@@ -12,10 +12,12 @@ let bookmarks =[];
 
 //light/dark mode toggle
 // time complexity O(1)
+
 lightDarkButton.addEventListener('click',function()
 {
     document.body.classList.toggle('dark-mode');
     //change button text
+
     if(document.body.classList.contains('dark-mode')){
         lightDarkButton.textContent ='Light mode';
     }
@@ -23,7 +25,9 @@ lightDarkButton.addEventListener('click',function()
         lightDarkButton.textContent='Dark mode';
     }
 })
+
 //toggle card view
+
 cardViewButton.addEventListener('click',function()
 {
     bookmarksContainer.classList.add('card-view');
@@ -31,18 +35,20 @@ cardViewButton.addEventListener('click',function()
 });
 
 //toggle list view
+
 listViewButton.addEventListener('click',function(){
     bookmarksContainer.classList.add('list-view');
     bookmarksContainer.classList.remove('card-view');
 });
 
-//add button click
 addButton.addEventListener('click',function() {
      //get the name and the url
+
     const title =siteNameInput.value.trim();
     const url = urlInput.value.trim();
 
-     //valid or unvalid inputs
+     //valid or invalid inputs
+
     if(title=== ''){ 
         alert('Enter a Website name');
         return;
@@ -51,7 +57,7 @@ addButton.addEventListener('click',function() {
        alert('URL must start with http:// or https://');
        return;
     }
-    //create a bookmark
+
     const bookmark = {
         title:title,
         url:url,
@@ -60,14 +66,18 @@ addButton.addEventListener('click',function() {
 
     //add to the array
     // time complexity O(1)
+
     bookmarks.push(bookmark);
+
     //render bookmarks on the page
+
     renderBookmarks();
     siteNameInput.value ='';
     urlInput.value = '';
 });
 
 //toggle show favorites
+
 let showingFavorites = false;
 showFavoritesButton.addEventListener('click',function() {
      showingFavorites = !showingFavorites;
@@ -76,17 +86,20 @@ showFavoritesButton.addEventListener('click',function() {
  });
      
 
-//n number of bookmarks , favBtn=worstCase
 //dom manipulation
+
 function renderBookmarks(){
+
     //clear previous bookmarks
     // time comlexity O(1)
+
     bookmarksContainer.innerHTML ='';
     const bookmarksToShow = showingFavorites
          ? bookmarks.filter(bm => bm.favorite)
          : bookmarks;
 
     //filter showing fav
+
     if(bookmarksToShow.length ===0){
         emptyMessage.style.display= 'block';
         return;
@@ -95,11 +108,13 @@ function renderBookmarks(){
         emptyMessage.style.display ='none';
     }
     //create bookmark elements
+
     bookmarksToShow.forEach((bm,index) => {
         const div =document.createElement('div');
         div.className ='bookmark';
 
         //bookmark url link
+
         const link =document.createElement('a');
         link.href =bm.url;
         link.textContent=bm.title;
@@ -107,22 +122,25 @@ function renderBookmarks(){
         div.appendChild(link);
 
         //favorite button
+
         const favoriteButton =document.createElement('button');
         favoriteButton.textContent=bm.favorite?'★' : '☆';
         favoriteButton.addEventListener('click',function(){
             bm.favorite=!bm.favorite;
-            // time complexity O(n^2)
+            // time complexity O(n)
+
             renderBookmarks();//rerender to update star
         });
         div.appendChild(favoriteButton);
 
         //delete button
+
         const deleteButton =document.createElement('button');
         deleteButton.textContent = '🗑';
         // time complexity O(n)
+
         deleteButton.addEventListener('click',function(){
             bookmarks.splice(index,1);
-            // time complexity O(n^2)
             renderBookmarks();
         });
         div.appendChild(deleteButton);
