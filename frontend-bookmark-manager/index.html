@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bookmark Manager!</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!--Add bookmark details-->
+
+    <section id="addBookMarks" class="page-section">
+        <h1>🔖Bookmark manager</h1>
+        <h2>Hope you enjoy your experience!:> </h2>
+        <h3> Bookmark Your Favorite sites ⬇️</h3>
+
+        <button id="lightDarkMode">light/dark</button>
+
+        <input id="siteName" type="text" placeholder="Enter website name">
+        <input id="URL" type="url" placeholder="Enter website URL https://example.com">
+
+        <button id="addButton">Add Bookmark</button>
+    </section>
+
+    <!--View Mode Section-->
+
+    <section id="viewModeSection" class="page-section">
+        <button id="cardView">card view</button>
+        <button id="listView">list view</button>
+        <button id="showFavorites>">show Favorites</button>
+    </section>
+
+    <!--Bookmark list-->
+
+    <section id="bookmarksListsSection" class="page-section">
+        <div id="bookmarksContainer"></div>
+        <div id="empty">No bookmarks yet.</div>
+    </section>
+    
+    <script src="script.js"></script>  
+</body>
+</html>
